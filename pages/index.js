@@ -14,6 +14,7 @@ const Home = () => {
 
   const renders = useRef(0)
   const timer = useRef()
+  const textRef = useRef()
 
   const startTimer = () => {
     timer.current = setInterval(() => {
@@ -55,6 +56,11 @@ const Home = () => {
     renders.current = renders.current + 1
   }
 
+
+  const focusOnTextInput = () => {
+    textRef.current.focus()
+  }
+
   useEffect(() => {
     console.log('useEffect triggered')
   }, [])
@@ -64,7 +70,7 @@ const Home = () => {
   return (
     <div className='w-full  select-none'>
       <div className=' space-y-4 mx-auto w-96 p-8 text-center mt-16 h-96'>
-        <input className='w-full p-2 rounded-md bg-white' onChange={handleChange} type="text" value={text} placeholder='Type and see what happens...'/>
+        <input className='w-full p-2 rounded-md bg-white' ref={textRef} onChange={handleChange} type="text" value={text} placeholder='Type and see what happens...'/>
         <div className='flex space-x-2 pt-6'>
           <div className='bg-white hover:bg-slate-300 p-4 w-full rounded-md cursor-pointer' onClick={startTimer}>Start</div>
           <div className='bg-white hover:bg-slate-300 p-4 w-full rounded-md cursor-pointer' onClick={stopTimer}>Stop</div>
@@ -73,6 +79,9 @@ const Home = () => {
         <div className='flex space-x-2 pt-6'>
           <div className='bg-white hover:bg-slate-300 p-4 w-full rounded-md cursor-pointer font-bold text-3xl  ' onClick={decrease}>-</div>
           <div className='bg-white hover:bg-slate-300 p-4 w-full rounded-md cursor-pointer font-bold text-3xl  ' onClick={increase}>+</div>
+        </div>
+        <div className='flex space-x-2 pt-6'>
+          <div className='bg-white hover:bg-slate-300 p-4 w-full rounded-md cursor-pointer   ' onClick={focusOnTextInput}>Focus on Text Input</div>
         </div>
 
         <div className='text-white pt-6'>Seconds: <span>{seconds}</span></div>
